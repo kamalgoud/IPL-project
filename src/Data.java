@@ -13,7 +13,12 @@ public class Data {
                 String[] dataArr = sc.nextLine().split(",");
                 ArrayList<String> listData = new ArrayList<>();
                 for(String s:dataArr){
-                    listData.add(s);
+                    if(s.trim().equals("Rising Pune Supergiant")){
+                        listData.add("Rising Pune Supergiants");
+                    }
+                    else {
+                        listData.add(s);
+                    }
                 }
                 matchData.add(listData);
             }
