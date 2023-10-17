@@ -16,11 +16,37 @@ public class Main {
         Data data = new Data();
         data.matchesData(matchData);
         Questions q = new Questions();
-//        q.matchesPerYear(matchData);
+
+
+        //1st question
+        q.matchesPerYear(matchData);
+
+
+        //2nd question
         q.matchesWonOfAllTeamsOverAllYears(matchData);
 
         //match_id,inning,batting_team,bowling_team,over,ball,batsman,non_striker,bowler,is_super_over,wide_runs,bye_runs,legbye_runs,noball_runs,penalty_runs,batsman_runs,extra_runs,total_runs,player_dismissed,dismissal_kind,fielder
         //   0       1       2              3        4     5     6           7       8        9            10       11           12         13           14       15            16          17          18              19          20
+        ArrayList<ArrayList<String>> deliveryData = new ArrayList<>();
+        data.deliveriesDataMethod(deliveryData);
+
+
+        //3rd question
+        int startIdOf2016 = 0, endIdOf2016 = 0;
+        for(ArrayList<String> l:matchData){
+            if(l.get(1).equals("2016")){
+                startIdOf2016 = Integer.parseInt(l.get(0));
+                break;
+            }
+        }
+        for(ArrayList<String> l:matchData){
+            if(l.get(1).equals("2016")){
+                endIdOf2016 = Integer.parseInt(l.get(0));
+            }
+        }
+        q.extrasFor2016forAll(deliveryData,startIdOf2016,endIdOf2016);
+
+
 
     }
 

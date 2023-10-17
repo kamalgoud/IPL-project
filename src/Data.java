@@ -26,4 +26,27 @@ public class Data {
             throw new RuntimeException(e);
         }
     }
+
+    void deliveriesDataMethod(ArrayList<ArrayList<String>> deliveryData){
+        File f2 = new File("src/deliveries.csv");
+        try {
+            Scanner sc = new Scanner(f2);
+            sc.nextLine();
+            while (sc.hasNextLine()){
+                String[] sArr = sc.nextLine().split(",");
+                ArrayList<String> l = new ArrayList<>();
+                for(String s:sArr){
+                    if(s.trim().equals("Rising Pune Supergiant")){
+                        l.add("Rising Pune Supergiants");
+                    }
+                    else {
+                        l.add(s);
+                    }
+                }
+                deliveryData.add(l);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
