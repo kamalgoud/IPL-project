@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,12 +7,15 @@ public class Data {
         File f = new File("src/matches.csv");
 
         try {
-            Scanner sc = new Scanner(f);
-            sc.nextLine();
-            while(sc.hasNextLine()){
-                String[] dataArr = sc.nextLine().split(",");
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            String line = "";
+            String[] tempArr;
+            br.readLine();
+            while((line = br.readLine()) != null){
+                tempArr = line.split(",");
                 ArrayList<String> listData = new ArrayList<>();
-                for(String s:dataArr){
+                for(String s:tempArr){
                     if(s.trim().equals("Rising Pune Supergiant")){
                         listData.add("Rising Pune Supergiants");
                     }
@@ -25,18 +27,23 @@ public class Data {
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     void deliveriesDataMethod(ArrayList<ArrayList<String>> deliveryData){
         File f2 = new File("src/deliveries.csv");
         try {
-            Scanner sc = new Scanner(f2);
-            sc.nextLine();
-            while (sc.hasNextLine()){
-                String[] sArr = sc.nextLine().split(",");
+            FileReader fr = new FileReader(f2);
+            BufferedReader br = new BufferedReader(fr);
+            String line = "";
+            String[] tempArr;
+            br.readLine();
+            while ((line = br.readLine()) != null){
+                tempArr = line.split(",");
                 ArrayList<String> l = new ArrayList<>();
-                for(String s:sArr){
+                for(String s:tempArr){
                     if(s.trim().equals("Rising Pune Supergiant")){
                         l.add("Rising Pune Supergiants");
                     }
@@ -47,6 +54,8 @@ public class Data {
                 deliveryData.add(l);
             }
         } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

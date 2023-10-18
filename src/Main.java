@@ -60,6 +60,21 @@ public class Main {
             q.purpleCap(deliveryData,startOfYear,endOfYear,i);
         }
         System.out.println();
+
+        //7th question Leading run scorers of IPL
+        System.out.println("7. Leading Run Scorers of IPL ");
+        q.leadingRunScorer(deliveryData);
+        System.out.println();
+
+        //8th question Leading wicket takers of IPL
+        System.out.println("8. Leading Wicket Takers of IPL ");
+        q.leadingWicketTaker(deliveryData);
+        System.out.println();
+
+        //9th Most 50's of IPL
+        System.out.println("9. Players with Most 50's in IPL");
+        q.fifties(deliveryData);
+        System.out.println();
     }
 
     static int startIndexeOfYear(ArrayList<ArrayList<String>> matchData,String year){

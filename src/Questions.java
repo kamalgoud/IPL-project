@@ -115,4 +115,65 @@ public class Questions {
         }
         System.out.println("Purple cap for the year "+year+" goes to : "+s+" wickets: "+wickets);
     }
+
+
+    void leadingRunScorer(ArrayList<ArrayList<String>> deliveryData){
+        HashMap<String,Integer> runsScored = new HashMap<>();
+        for(ArrayList<String> l:deliveryData){
+            runsScored.put(l.get(6),runsScored.getOrDefault(l.get(6),0)+Integer.parseInt(l.get(15)));
+        }
+        ArrayList<Map.Entry<String,Integer>> list = new ArrayList<>(runsScored.entrySet());
+        Collections.sort(list,(o1,o2)->{
+            return o2.getValue().compareTo(o1.getValue());
+        });
+        for(int i=0;i<10;i++){
+            System.out.println(list.get(i).getKey()+" runs : "+list.get(i).getValue());
+        }
+    }
+
+    void leadingWicketTaker(ArrayList<ArrayList<String>> deliveryData){
+        HashMap<String,Integer> wickets = new HashMap<>();
+        for(ArrayList<String> l:deliveryData){
+            if(l.size()>19) {
+                if (l.get(19).equals("caught") || l.get(19).equals("bowled") || l.get(19).equals("lbw") || l.get(19).equals("caught and bowled") || l.get(19).equals("stumped")) {
+                    wickets.put(l.get(8), wickets.getOrDefault(l.get(8), 0) + 1);
+                }
+            }
+        }
+        ArrayList<Map.Entry<String,Integer>> list = new ArrayList<>(wickets.entrySet());
+        Collections.sort(list,(o1,o2)->{
+            return o2.getValue().compareTo(o1.getValue());
+        });
+        for(int i=0;i<10;i++){
+            System.out.println(list.get(i).getKey()+" wickets : "+list.get(i).getValue());
+        }
+    }
+
+
+    void fifties(ArrayList<ArrayList<String>> deliveryData){
+        HashMap<String,Integer> total = new HashMap<>();
+        for(int i=1;i<=636;i++){
+            HashMap<String,Integer> runsPerMatch = new HashMap<>();
+            for(ArrayList<String> l:deliveryData){
+                if(l.get(0).equals(Integer.toString(i))){
+                    runsPerMatch.put(l.get(6),runsPerMatch.getOrDefault(l.get(6),0)+Integer.parseInt(l.get(15)));
+                }
+                if(Integer.parseInt(l.get(0))>((i))){
+                    break;
+                }
+            }
+            for(String x:runsPerMatch.keySet()){
+                if(runsPerMatch.get(x)>=50){
+                    total.put(x,total.getOrDefault(x,0)+1);
+                }
+            }
+        }
+        ArrayList<Map.Entry<String,Integer>> l = new ArrayList<>(total.entrySet());
+        Collections.sort(l,(o1,o2)->{
+            return o2.getValue().compareTo(o1.getValue());
+        });
+        for(int i=0;i<10;i++){
+            System.out.println(l.get(i).getKey()+" fifties : "+l.get(i).getValue());
+        }
+    }
 }
