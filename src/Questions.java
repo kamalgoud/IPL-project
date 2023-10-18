@@ -20,7 +20,7 @@ public class Questions {
     void matchesWonOfAllTeamsOverAllYears(ArrayList<ArrayList<String>> matchData){
         HashMap<String,Integer> matchOfAllPerAllYear = new HashMap<>();
         for(ArrayList<String> l : matchData){
-            if(!l.get(10).equals("")) {
+            if(!l.get(10).isEmpty()) {
                 matchOfAllPerAllYear.put(l.get(10), matchOfAllPerAllYear.getOrDefault(l.get(10), 0) + 1);
             }
         }
