@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Data {
     void matchesData(ArrayList<ArrayList<String>> matchData){
