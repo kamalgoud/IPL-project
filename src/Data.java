@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Data {
     void matchesData(ArrayList<ArrayList<String>> matchData){
         File f = new File("src/matches.csv");
+
         try {
             Scanner sc = new Scanner(f);
             sc.nextLine();

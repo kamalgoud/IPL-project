@@ -32,23 +32,37 @@ public class Main {
 
 
         //3rd question
-        int startIdOf2016 = 0, endIdOf2016 = 0;
-        for(ArrayList<String> l:matchData){
-            if(l.get(1).equals("2016")){
-                startIdOf2016 = Integer.parseInt(l.get(0));
-                break;
-            }
-        }
-        for(ArrayList<String> l:matchData){
-            if(l.get(1).equals("2016")){
-                endIdOf2016 = Integer.parseInt(l.get(0));
-            }
-        }
+        int startIdOf2016 = startIndexeOfYear(matchData,"2016");
+        int endIdOf2016 = endIndexeOfYear(matchData,"2016");
         q.extrasFor2016forAll(deliveryData,startIdOf2016,endIdOf2016);
 
+
+        //4th question
+        int startIdOf2015 = startIndexeOfYear(matchData,"2015");
+        int endIdOf2015 = endIndexeOfYear(matchData,"2015");
+        q.topEconomicalBowler2015(deliveryData,startIdOf2015,endIdOf2015);
 
 
     }
 
+    static int startIndexeOfYear(ArrayList<ArrayList<String>> matchData,String year){
+        int start = 0;
+        for(ArrayList<String> l:matchData){
+            if(l.get(1).equals(year)){
+                start = Integer.parseInt(l.get(0));
+                break;
+            }
+        }
+        return  start;
+    }
+    static int endIndexeOfYear(ArrayList<ArrayList<String>> matchData,String year){
+        int end = 0;
+        for(ArrayList<String> l:matchData){
+            if(l.get(1).equals(year)){
+                end = Integer.parseInt(l.get(0));
+            }
+        }
+        return  end;
+    }
 
 }
