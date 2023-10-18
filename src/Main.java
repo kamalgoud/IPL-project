@@ -75,6 +75,15 @@ public class Main {
         System.out.println("9. Players with Most 50's in IPL");
         q.fifties(deliveryData);
         System.out.println();
+
+        //10th city c
+        System.out.println("10. City with highest inning Score for every Season");
+        for(int i=2008;i<=2017;i++){
+            int startOfYear = startIndexeOfYear(matchData,Integer.toString(i));
+            int endOfYear = endIndexeOfYear(matchData,Integer.toString(i));
+            q.cityWithHighestScore(matchData,deliveryData,startOfYear,endOfYear,i);
+        }
+        System.out.println();
     }
 
     static int startIndexeOfYear(ArrayList<ArrayList<String>> matchData,String year){

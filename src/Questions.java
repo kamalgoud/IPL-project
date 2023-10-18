@@ -40,7 +40,7 @@ public class Questions {
         HashMap<String,Integer> hashMap = new HashMap<>();
         for(ArrayList<String> list:deliveryData){
             if(Integer.parseInt(list.get(0))>=start && Integer.parseInt(list.get(0))<=end) {
-                hashMap.put(list.get(3), hashMap.getOrDefault(list.get(3), 0) + Integer.parseInt(list.get(16)));
+                hashMap.put(list.get(3), hashMap.getOrDefault(list.get(3), 0) + Integer.parseInt(list.get(16)) - Integer.parseInt(list.get(11)) - Integer.parseInt(list.get(12)) - Integer.parseInt(list.get(14)));
             }
         }
         for(String s:hashMap.keySet()){
@@ -175,5 +175,49 @@ public class Questions {
         for(int i=0;i<10;i++){
             System.out.println(l.get(i).getKey()+" fifties : "+l.get(i).getValue());
         }
+    }
+
+    void cityWithHighestScore(ArrayList<ArrayList<String>> matchData,ArrayList<ArrayList<String>> deliveryData,int start,int end,int year){
+        HashMap<String,Integer> cityRunsInnings1 = new HashMap<>();
+        HashMap<String,Integer> cityRunsInnings2 = new HashMap<>();
+        String resString = "";
+        int resRuns = 0;
+        String team1 = "";
+        String team2 = "";
+        String resTeam = "";
+        for(int i=start;i<=end;i++){
+            String city = "";
+            for(ArrayList<String> l:matchData){
+                if(Integer.parseInt(l.get(0))==i){
+                    city = l.get(2);
+                    break;
+                }
+            }
+            for(ArrayList<String> l:deliveryData){
+                if(Integer.parseInt(l.get(0))==i ) {
+                    if(l.get(1).equals("1")) {
+                        cityRunsInnings1.put(city, cityRunsInnings1.getOrDefault(city, 0) + Integer.parseInt(l.get(17)));
+                            team1 = l.get(2);
+                    }
+                    else if(l.get(1).equals("2")) {
+                        cityRunsInnings2.put(city, cityRunsInnings2.getOrDefault(city, 0) + Integer.parseInt(l.get(17)));
+                            team2 = l.get(2);
+                    }
+                }
+            }
+            if(cityRunsInnings1.get(city)>resRuns){
+                resRuns = cityRunsInnings1.get(city);
+                resString = city;
+                resTeam = team1;
+            }
+            if(cityRunsInnings2.get(city)>resRuns){
+                resRuns = cityRunsInnings2.get(city);
+                resString = city;
+                resTeam = team2;
+            }
+            cityRunsInnings1.put(city,0);
+            cityRunsInnings2.put(city,0);
+        }
+        System.out.println("for year "+year+" "+resString+" contains highest innings score of "+resRuns+" by "+resTeam);
     }
 }
