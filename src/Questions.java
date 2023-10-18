@@ -40,7 +40,7 @@ public class Questions {
         HashMap<String,Integer> hashMap = new HashMap<>();
         for(ArrayList<String> list:deliveryData){
             if(Integer.parseInt(list.get(0))>=start && Integer.parseInt(list.get(0))<=end) {
-                hashMap.put(list.get(3), hashMap.getOrDefault(list.get(3), 0) + Integer.parseInt(list.get(16)) - Integer.parseInt(list.get(11)) - Integer.parseInt(list.get(12)) - Integer.parseInt(list.get(14)));
+                hashMap.put(list.get(3), hashMap.getOrDefault(list.get(3), 0) + Integer.parseInt(list.get(16)) );
             }
         }
         for(String s:hashMap.keySet()){
@@ -53,7 +53,7 @@ public class Questions {
         HashMap<String,Double> hashMapRuns = new HashMap<>();
         for(ArrayList<String> list:deliveryData){
             if(Integer.parseInt(list.get(0))>=start && Integer.parseInt(list.get(0))<=end) {
-                hashMapRuns.put(list.get(8), hashMapRuns.getOrDefault(list.get(8), 0.0) + Integer.parseInt(list.get(17)));
+                hashMapRuns.put(list.get(8), hashMapRuns.getOrDefault(list.get(8), 0.0) + Integer.parseInt(list.get(17)) - Integer.parseInt(list.get(11)) - Integer.parseInt(list.get(12)) - Integer.parseInt(list.get(14)));
             }
         }
         HashMap<String,Double> hashMapNoOfDeliveries = new HashMap<>();
@@ -73,7 +73,7 @@ public class Questions {
         Collections.sort(sortedList,(o1,o2)->{
             return o1.getValue().compareTo(o2.getValue());
         });
-        for(int i=0;i<10;i++){
+        for(int i=0;i<5;i++){
             System.out.print(sortedList.get(i).getKey()+" ");
             System.out.printf(" with economy %.3f",sortedList.get(i).getValue());
             System.out.println();
