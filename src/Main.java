@@ -15,10 +15,12 @@ public class Main {
 
 
         //1st question
+        System.out.println("1. Matches Conducted Per Year ");
         q.matchesPerYear(matchData);
 
 
         //2nd question
+        System.out.println("2. Matches won by All Teams over All Years ");
         q.matchesWonOfAllTeamsOverAllYears(matchData);
 
         //match_id,inning,batting_team,bowling_team,over,ball,batsman,non_striker,bowler,is_super_over,wide_runs,bye_runs,legbye_runs,noball_runs,penalty_runs,batsman_runs,extra_runs,total_runs,player_dismissed,dismissal_kind,fielder
@@ -28,17 +30,36 @@ public class Main {
 
 
         //3rd question
+        System.out.println("3. Extra runs conceded by All Teams in 2016 ");
         int startIdOf2016 = startIndexeOfYear(matchData,"2016");
         int endIdOf2016 = endIndexeOfYear(matchData,"2016");
         q.extrasFor2016forAll(deliveryData,startIdOf2016,endIdOf2016);
 
 
         //4th question
+        System.out.println("4. Top Economical Bowlers of 2015 ");
         int startIdOf2015 = startIndexeOfYear(matchData,"2015");
         int endIdOf2015 = endIndexeOfYear(matchData,"2015");
         q.topEconomicalBowler2015(deliveryData,startIdOf2015,endIdOf2015);
 
 
+        //5th question orange cap;
+        System.out.println("5. Orange Cap for All Years ");
+        for(int i=2008;i<=2017;i++){
+            int startOfYear = startIndexeOfYear(matchData,Integer.toString(i));
+            int endOfYear = endIndexeOfYear(matchData,Integer.toString(i));
+            q.orangeCap(deliveryData,startOfYear,endOfYear,i);
+        }
+        System.out.println();
+
+        //6th qestion purple cap;
+        System.out.println("6. Purple cap for All Years ");
+        for(int i=2008;i<=2017;i++){
+            int startOfYear = startIndexeOfYear(matchData,Integer.toString(i));
+            int endOfYear = endIndexeOfYear(matchData,Integer.toString(i));
+            q.purpleCap(deliveryData,startOfYear,endOfYear,i);
+        }
+        System.out.println();
     }
 
     static int startIndexeOfYear(ArrayList<ArrayList<String>> matchData,String year){

@@ -9,7 +9,6 @@ public class Questions {
         for(ArrayList<String> l : matchData){
             mapOfMatchPerYear.put(l.get(1),mapOfMatchPerYear.getOrDefault(l.get(1),0)+1);
         }
-//        System.out.println(mapOfMatchPerYear);
         for(String s:mapOfMatchPerYear.keySet()){
             System.out.println("For year "+s+" Matches played are : "+mapOfMatchPerYear.get(s));
         }
@@ -24,15 +23,10 @@ public class Questions {
                 matchOfAllPerAllYear.put(l.get(10), matchOfAllPerAllYear.getOrDefault(l.get(10), 0) + 1);
             }
         }
-//        System.out.println(matchOfAllPerAllYear);
         ArrayList<Map.Entry<String,Integer>> sortedList = new ArrayList<>(matchOfAllPerAllYear.entrySet());
         Collections.sort(sortedList,(o1,o2)->{
             return o1.getValue().compareTo(o2.getValue());
         });
-//        for(String s:matchOfAllPerAllYear.keySet()){
-//            System.out.println("Matches won by "+s+" over All Years is : "+matchOfAllPerAllYear.get(s));
-//        }
-//        System.out.println(sortedList);
         sortedList.forEach(stringIntegerEntry -> {
             System.out.println("Matches won by "+stringIntegerEntry.getKey()+" over All Years is : "+stringIntegerEntry.getValue());
         });
@@ -68,6 +62,7 @@ public class Questions {
                 hashMapNoOfDeliveries.put(list.get(8), hashMapNoOfDeliveries.getOrDefault(list.get(8), 0.0) + 1);
             }
         }
+        //economy = (runs_conceded)/(overs)  over = (balls/6)
         HashMap<String,Double> hashMapEconomy = new HashMap<>();
         for(String s:hashMapRuns.keySet()){
             double d1 = hashMapNoOfDeliveries.get(s)/6;
@@ -78,11 +73,46 @@ public class Questions {
         Collections.sort(sortedList,(o1,o2)->{
             return o1.getValue().compareTo(o2.getValue());
         });
-        System.out.println("Most Economical Bowlers of 2015 are : ");
         for(int i=0;i<10;i++){
             System.out.print(sortedList.get(i).getKey()+" ");
             System.out.printf(" with economy %.3f",sortedList.get(i).getValue());
             System.out.println();
         }
+        System.out.println();
+    }
+
+    void orangeCap(ArrayList<ArrayList<String>> deliveryData,int start,int end,int year){
+        HashMap<String,Integer> runsMap = new HashMap<>();
+        int runs = 0;
+        String s = "";
+        for(ArrayList<String> l:deliveryData){
+            if(Integer.parseInt(l.get(0))>=start && Integer.parseInt(l.get(0))<=end){
+                    runsMap.put(l.get(6), runsMap.getOrDefault(l.get(6), 0) + Integer.parseInt(l.get(15)));
+                    if (runsMap.get(l.get(6)) > runs) {
+                        runs = runsMap.get(l.get(6));
+                        s = l.get(6);
+                    }
+            }
+        }
+        System.out.println("Orange cap for the year "+year+" goes to : "+s+" runs: "+runs);
+    }
+
+
+    void purpleCap(ArrayList<ArrayList<String>> deliveryData,int start,int end,int year){
+        HashMap<String,Integer> wicketsMap = new HashMap<>();
+        int wickets = 0;
+        String s = "";
+        for(ArrayList<String> l:deliveryData){
+            if(l.size()>19 && Integer.parseInt(l.get(0))>=start && Integer.parseInt(l.get(0))<=end){
+                if(l.get(19).equals("caught") || l.get(19).equals("bowled") || l.get(19).equals("lbw") || l.get(19).equals("caught and bowled") || l.get(19).equals("stumped")) {
+                    wicketsMap.put(l.get(8), wicketsMap.getOrDefault(l.get(8), 0) + 1);
+                    if (wicketsMap.get(l.get(8)) > wickets) {
+                        wickets = wicketsMap.get(l.get(8));
+                        s = l.get(8);
+                    }
+                }
+            }
+        }
+        System.out.println("Purple cap for the year "+year+" goes to : "+s+" wickets: "+wickets);
     }
 }
