@@ -113,6 +113,49 @@ public class Main {
             getCityWithHighestInningScoreForEachYear(matches,deliveries,startOfYear,endOfYear,i);
         }
         System.out.println();
+
+        // 11th question
+        System.out.println("11. Venues to players to sixers ");
+        getTopPlayersWithSixersAtEachVenue2016(deliveries,matches,startIdOf2016,endIdOf2016);
+    }
+
+    private static void getTopPlayersWithSixersAtEachVenue2016(ArrayList<Delivery> deliveries, ArrayList<Match> matches, int startIdOf2016, int endIdOf2016) {
+        HashMap<String,HashMap<String,Integer>> venuesData = new HashMap<>();
+        for(Match match:matches){
+            if(Integer.parseInt(match.getId())>=startIdOf2016 && Integer.parseInt(match.getId())<=endIdOf2016) {
+                for (Delivery delivery : deliveries) {
+                    if((delivery.getId()).equals(match.getId())) {
+                        if (venuesData.containsKey(match.getVenue())) {
+                            HashMap<String, Integer> batsmanSixers = venuesData.get(match.getVenue());
+                            if (delivery.getBatsman_runs().equals("6")) {
+                                batsmanSixers.put(delivery.getBatsman(), batsmanSixers.getOrDefault(delivery.getBatsman(), 0) + 1);
+                            }
+                            venuesData.put(match.getVenue(), batsmanSixers);
+                        } else {
+                            HashMap<String, Integer> batsmanSixers = new HashMap<>();
+                            if (delivery.getBatsman_runs().equals("6")) {
+                                batsmanSixers.put(delivery.getBatsman(), 1);
+                            }
+                            venuesData.put(match.getVenue(), batsmanSixers);
+                        }
+                    }
+                }
+            }
+        }
+        for(String venue:venuesData.keySet()){
+            HashMap<String,Integer> batsmanSixers = venuesData.get(venue);
+            int maxSix = 0;
+            String maxPlayer = "";
+            String maxVenue = venue;
+            for(String batsman:batsmanSixers.keySet()){
+                if(batsmanSixers.get(batsman)>maxSix){
+                    maxSix = batsmanSixers.get(batsman);
+                    maxPlayer = batsman;
+                }
+            }
+            System.out.println(maxVenue+" ---> "+maxPlayer+" ---> "+maxSix);
+        }
+//        System.out.println(venuesData);
     }
 
     private static ArrayList<Match> getMatchesData(){
